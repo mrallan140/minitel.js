@@ -28,11 +28,11 @@ class MinitelWSClient extends MinitelClient {
 }
 
 class Minitel extends EventEmitter {
-	constructor(wsPort=80) {
+	constructor(wsoption) {
 		super();
 		this.wsPort = wsPort;
 		// websocket
-		this.wsServer = new websocket.Server({ port: this.wsPort });
+		this.wsServer = new websocket.Server(wsoption);
 		this.wsServer.on("connection", (connection) => {
 			let currentConnection = new MinitelWSClient(connection);
 			this.emit("connection", currentConnection);
